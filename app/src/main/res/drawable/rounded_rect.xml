@@ -1,0 +1,17 @@
+<!-- res/drawable/rounded_shape_with_blue_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background blue color -->
+    <item android:drawable="@color/secondary_blue"/>
+    <!-- Rounded corners on top -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/grey_color"/>
+            <stroke android:width="2dp" android:color="@color/secondary_blue"/>
+            <corners
+                android:topLeftRadius="0dp"
+                android:topRightRadius="0dp"
+                android:bottomLeftRadius="300dp"
+                android:bottomRightRadius="300dp"/>
+        </shape>
+    </item>
+</layer-list>
