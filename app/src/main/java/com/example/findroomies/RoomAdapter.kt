@@ -8,8 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class RoomAdapter(
-    private var rooms:MutableList<RoomModel>
+    private var rooms:MutableList<RoomModel>,
+    private var clickInterface:OnRoomItemClickInterface
 ): RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
+
 
     inner class RoomViewHolder(roomView: View): RecyclerView.ViewHolder(roomView){
          var tvTitle: TextView
@@ -18,6 +20,14 @@ class RoomAdapter(
         init {
             tvTitle = roomView.findViewById(R.id.TitleId)
             tvAddress = roomView.findViewById(R.id.AddressId)
+
+            roomView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    //NOTE: This click listener can also be set in onBindViewHolder
+                    clickInterface.onRoomItemClick(rooms[position])
+                }
+            }
 
         }
     }
@@ -42,7 +52,6 @@ class RoomAdapter(
         // OR
         holder.tvTitle.text = rooms[position].title
         holder.tvAddress.text = rooms[position].address
-
 
     }
 }
