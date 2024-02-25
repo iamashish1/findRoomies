@@ -13,9 +13,9 @@ class HomeActivity : AppCompatActivity(),OnRoomItemClickInterface {
         setContentView(R.layout.activity_home)
         val recyclerView= findViewById<RecyclerView>(R.id.recycler_view_id)
         var rooms= mutableListOf<RoomModel>(
-            RoomModel("Lovely Room","190 fleming drive"),
-            RoomModel("Not Good","762 Maitland Street")
-        )
+            RoomModel("Lovely Lovely Room","190 fleming drive", "$450/month",false,FurnishingType.FULLY_FURNISHED,PropertyType.HOUSE),
+            RoomModel("Condo Condo Condo","762 Maitland Street", "$990/month",true,FurnishingType.SEMI_FURNISHED,PropertyType.CONDO),
+            )
         val roomAdapter:RoomAdapter = RoomAdapter(rooms, this);
 
         recyclerView.adapter=roomAdapter
@@ -25,9 +25,8 @@ class HomeActivity : AppCompatActivity(),OnRoomItemClickInterface {
 
     override fun onRoomItemClick(room: RoomModel) {
         val intent: Intent = Intent(this,RoomDetailActivity::class.java)
-        Log.d("alkdmaslkdm",room.address);
-        Log.d("alkdmaslkdm",room.title);
-
+        Log.d("LOG CLICK",room.address);
+        Log.d("LOG CLICK TITLE",room.title);
         startActivity(intent)
     }
 }
