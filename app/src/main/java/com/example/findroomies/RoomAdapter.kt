@@ -19,11 +19,22 @@ class RoomAdapter(
          var tvTitle: TextView
          var tvAddress: TextView
          var ivRoomImage: ImageView
+         var tvRent: TextView
+         var tvUtility: TextView
+         var tvFurnishing: TextView
+         var tvHouseType: TextView
 
         init {
             tvTitle = roomView.findViewById(R.id.TitleId)
             tvAddress = roomView.findViewById(R.id.AddressId)
+            tvRent= roomView.findViewById(R.id.priceId)
             ivRoomImage= roomView.findViewById(R.id.imageView)
+            tvUtility= roomView.findViewById(R.id.utilityId)
+            tvFurnishing= roomView.findViewById(R.id.furnishId)
+            tvHouseType= roomView.findViewById(R.id.houseTypeId)
+
+
+
 
             roomView.setOnClickListener {
                 val position = adapterPosition
@@ -67,6 +78,15 @@ class RoomAdapter(
 
         holder.tvTitle.text = rooms[position].title
         holder.tvAddress.text = rooms[position].address
+        holder.tvRent.text = rooms[position].rent
+        holder.tvUtility.text = if (rooms[position].isUtilityIncluded) {
+            "Utility Included"
+        } else {
+            "Utility Not Included"
+        }
+        holder.tvFurnishing.text = rooms[position].furnishingType.toString()
+        holder.tvHouseType.text = rooms[position].houseType.toString()
+
 
 
     }

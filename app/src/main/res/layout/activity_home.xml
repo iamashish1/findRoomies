@@ -20,11 +20,22 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/grey_color"
         android:minHeight="?attr/actionBarSize"
         app:title="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <!-- Loading indicator -->
+    <ProgressBar
+        android:id="@+id/loading_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/recycler_view_id"
+        app:layout_constraintEnd_toEndOf="@id/recycler_view_id"
+        app:layout_constraintStart_toStartOf="@id/recycler_view_id"
+        app:layout_constraintTop_toTopOf="@id/recycler_view_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
