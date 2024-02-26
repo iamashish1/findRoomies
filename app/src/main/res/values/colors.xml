@@ -15,5 +15,6 @@
     <color name="primary_blue">#056CF2</color>
     <color name="secondary_blue">#138AF2</color>
     <color name="primary_amber">#F2A922</color>
+    <color name="border_color">#C7D7F2</color>
 
 </resources>

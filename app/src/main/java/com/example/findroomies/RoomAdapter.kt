@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 
 class RoomAdapter(
     private var rooms:MutableList<RoomModel>,
@@ -16,10 +18,12 @@ class RoomAdapter(
     inner class RoomViewHolder(roomView: View): RecyclerView.ViewHolder(roomView){
          var tvTitle: TextView
          var tvAddress: TextView
+         var ivRoomImage: ImageView
 
         init {
             tvTitle = roomView.findViewById(R.id.TitleId)
             tvAddress = roomView.findViewById(R.id.AddressId)
+            ivRoomImage= roomView.findViewById(R.id.imageView)
 
             roomView.setOnClickListener {
                 val position = adapterPosition
@@ -50,8 +54,20 @@ class RoomAdapter(
 //            findViewById<TextView>(R.id.AddressId).text=rooms[position].address
 //        }
         // OR
+        val image= "https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg?cs=srgb&dl=pexels-vecislavas-popa-1669799.jpg&fm=jpg";
+        // Load image into ImageView using Coil
+        holder.ivRoomImage.load(rooms[position].imageAddress) {
+            // Optionally, you can configure Coil's image loading options here
+            placeholder(R.drawable.flat_button) // Placeholder drawable while loading
+            error(R.drawable.ic_launcher_background) // Error drawable if loading fails
+            crossfade(true) // Enable crossfade animation
+            // And more options...
+        }
+
+
         holder.tvTitle.text = rooms[position].title
         holder.tvAddress.text = rooms[position].address
+
 
     }
 }
