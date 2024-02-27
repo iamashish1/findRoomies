@@ -20,12 +20,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey_color"
+        android:background="#009C3737"
         android:minHeight="?attr/actionBarSize"
-        app:title="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/app_name" />
     <!-- Loading indicator -->
     <ProgressBar
         android:id="@+id/loading_indicator"
