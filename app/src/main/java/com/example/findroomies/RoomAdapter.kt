@@ -84,10 +84,9 @@ class RoomAdapter(
         } else {
             "Utility Not Included"
         }
+
         holder.tvFurnishing.text = rooms[position].furnishingType.toString()
         holder.tvHouseType.text = rooms[position].houseType.toString()
-
-
 
     }
 }

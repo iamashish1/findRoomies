@@ -60,18 +60,27 @@
 
     <TextView
         android:id="@+id/priceId"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="100dp"
+        app:layout_constraintHorizontal_bias="0"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:background="@android:color/transparent"
+
         android:text="$875/Month"
         android:textColor="#137517"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@+id/AddressId"
-        app:layout_constraintTop_toBottomOf="@+id/AddressId" />
+        app:layout_constraintTop_toBottomOf="@+id/AddressId"
+       />
 
     <TextView
         android:id="@+id/utilityId"
         android:layout_width="0dp"
+        android:maxLines="2"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
@@ -79,6 +88,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/priceId"
         app:layout_constraintTop_toTopOf="@+id/priceId" />
+
+
 
 
     <TextView
