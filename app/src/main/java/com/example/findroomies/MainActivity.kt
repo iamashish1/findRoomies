@@ -4,15 +4,19 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.findroomies.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    //VIEW BINDING
+    private lateinit var binding: ActivityMainBinding;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding= ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-       val button= findViewById<Button>(R.id.button);
-
-        button.setOnClickListener {
+        binding.button.setOnClickListener {
             val intent: Intent = Intent(this,HomeActivity::class.java)
             startActivity(intent)
 

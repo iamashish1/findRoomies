@@ -5,6 +5,6 @@
         android:id="@+id/action_search"
         app:showAsAction="always"
         android:title="Logout"
-        android:icon="@drawable/round_logout_20"
+        android:icon="@drawable/round_add_box_20"
          />
 </menu>

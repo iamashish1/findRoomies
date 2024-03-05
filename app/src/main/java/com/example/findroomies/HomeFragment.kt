@@ -53,12 +53,13 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface  {
                         title = document.getString("title") ?: "",
                         address = document.getString("address") ?: "",
                         rent = document.getString("rent") ?: "",
-                        imageAddress = document.getString("imageUrl") ?: "",
+                        imageUrl = document.getString("imageUrl") ?: "",
                         furnishingType = document.get("furnishingType", FurnishingType::class.java) ?: FurnishingType.UNKNOWN,
                         isUtilityIncluded = document.getBoolean("isUtilityIncluded") ?: false,
                         houseType = document.get("houseType", PropertyType::class.java) ?: PropertyType.UNKNOWN
                     )
                     rooms.add(room)
+
                 }
                 loadingIndicator.visibility = View.GONE
                 roomAdapter.notifyDataSetChanged()

@@ -5,7 +5,7 @@ data class RoomModel (
     val title:String,
     val address:String,
     val rent: String,
-    val imageAddress: String,
+    val imageUrl: String,
     val isUtilityIncluded:Boolean,
     val furnishingType: FurnishingType,
     val houseType: PropertyType

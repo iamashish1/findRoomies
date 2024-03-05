@@ -1,5 +1,6 @@
 package com.example.findroomies
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,9 +66,8 @@ class RoomAdapter(
 //            findViewById<TextView>(R.id.AddressId).text=rooms[position].address
 //        }
         // OR
-        val image= "https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg?cs=srgb&dl=pexels-vecislavas-popa-1669799.jpg&fm=jpg";
         // Load image into ImageView using Coil
-        holder.ivRoomImage.load(rooms[position].imageAddress) {
+        holder.ivRoomImage.load(rooms[position].imageUrl) {
             // Optionally, you can configure Coil's image loading options here
             placeholder(R.drawable.flat_button) // Placeholder drawable while loading
             error(R.drawable.ic_launcher_background) // Error drawable if loading fails

@@ -2,11 +2,19 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    //DAGGER
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
+    //DAGGER
 }
 
 android {
     namespace = "com.example.findroomies"
     compileSdk = 34
+
+    buildFeatures {
+        viewBinding = true
+    }
 
     defaultConfig {
         applicationId = "com.example.findroomies"
@@ -34,9 +42,21 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+}
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
 
+
 dependencies {
+    //gson json de/serialization
+    implementation ("com.google.code.gson:gson:2.10.1")
+
+    //Dagger Hilt(DI)
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
     // Declare the dependency for the Cloud Firestore library
