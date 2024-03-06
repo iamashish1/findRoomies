@@ -1,4 +1,4 @@
-package com.example.findroomies
+package com.example.findroomies.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,12 +6,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.View
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.example.findroomies.ui.fragments.FavoriteFragment
+import com.example.findroomies.ui.fragments.MessageFragment
+import com.example.findroomies.listeners.OnRoomItemClickInterface
+import com.example.findroomies.ui.fragments.ProfileFragment
+import com.example.findroomies.R
+import com.example.findroomies.data.model.RoomModel
+import com.example.findroomies.ui.fragments.HomeFragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeActivity : AppCompatActivity(),OnRoomItemClickInterface {
+class HomeActivity : AppCompatActivity(), OnRoomItemClickInterface {
     private lateinit var bottomNav : BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +44,7 @@ class HomeActivity : AppCompatActivity(),OnRoomItemClickInterface {
                     loadFragment(MessageFragment())
                     true
                 }
-                R.id.profile->{
+                R.id.profile ->{
                     loadFragment(ProfileFragment())
                     true
                 }
@@ -59,7 +65,7 @@ class HomeActivity : AppCompatActivity(),OnRoomItemClickInterface {
     }
 
     override fun onRoomItemClick(room: RoomModel) {
-        val intent = Intent(this,RoomDetailActivity::class.java)
+        val intent = Intent(this, RoomDetailActivity::class.java)
         Log.d("LOG CLICK",room.address)
         Log.d("LOG CLICK TITLE",room.title)
         startActivity(intent)

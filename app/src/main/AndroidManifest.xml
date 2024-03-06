@@ -15,14 +15,14 @@
         android:theme="@style/Theme.FindRoomies"
         tools:targetApi="31">
         <activity
-            android:name=".RoomDetailActivity"
+            android:name=".ui.activities.RoomDetailActivity"
             android:exported="false" />
         <activity
 
-            android:name=".HomeActivity"
+            android:name=".ui.activities.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

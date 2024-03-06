@@ -1,18 +1,19 @@
-package com.example.findroomies
+package com.example.findroomies.ui.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.findroomies.listeners.OnRoomItemClickInterface
+import com.example.findroomies.R
+import com.example.findroomies.data.model.RoomModel
 
 class RoomAdapter(
     private var rooms:MutableList<RoomModel>,
-    private var clickInterface:OnRoomItemClickInterface
+    private var clickInterface: OnRoomItemClickInterface
 ): RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
 
 

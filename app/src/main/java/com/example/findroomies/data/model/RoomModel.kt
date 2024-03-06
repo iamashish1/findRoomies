@@ -1,4 +1,4 @@
-package com.example.findroomies
+package com.example.findroomies.data.model
 
 data class RoomModel (
     val id:String,
