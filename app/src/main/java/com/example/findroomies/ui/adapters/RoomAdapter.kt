@@ -90,4 +90,10 @@ class RoomAdapter(
         holder.tvHouseType.text = rooms[position].houseType.toString()
 
     }
+
+    fun updateRooms(newRooms: List<RoomModel>) {
+        rooms.clear()
+        rooms.addAll(newRooms)
+        notifyDataSetChanged()
+    }
 }

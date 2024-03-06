@@ -63,6 +63,13 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-firestore")
     // Coil for image resource
+
+    //viewmodelscope
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+
+    //for livedata
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
+
     implementation("io.coil-kt:coil:2.6.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

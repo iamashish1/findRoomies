@@ -29,7 +29,7 @@ class HomeActivity : AppCompatActivity(), OnRoomItemClickInterface {
         setSupportActionBar(toolbar)
         //LOAD DEFAULT FRAGMENT
         loadFragment(HomeFragment())
-        bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav = findViewById(R.id.bottomNav)
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
