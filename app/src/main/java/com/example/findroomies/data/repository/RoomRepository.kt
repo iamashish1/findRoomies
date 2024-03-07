@@ -1,4 +1,4 @@
-package com.example.findroomies.data.repositoy
+package com.example.findroomies.data.repository
 
 import com.example.findroomies.data.model.RoomModel
 

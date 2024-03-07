@@ -1,6 +1,6 @@
 package com.example.findroomies.ui.fragments
 
-import RoomViewModel
+import com.example.findroomies.ui.viewmodels.RoomViewModel
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,16 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-import com.example.findroomies.data.model.FurnishingType
 import com.example.findroomies.listeners.OnRoomItemClickInterface
-import com.example.findroomies.data.model.PropertyType
 import com.example.findroomies.R
 import com.example.findroomies.ui.adapters.RoomAdapter
 import com.example.findroomies.ui.activities.RoomDetailActivity
 import com.example.findroomies.data.model.RoomModel
-import com.example.findroomies.data.repositoy.RoomRepositoryImpl
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.firestore
 
 /**
  * A simple [Fragment] subclass.
@@ -38,6 +33,7 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         loadingIndicator = view.findViewById(R.id.loading_indicator)
@@ -55,8 +51,7 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize ViewModel
-        roomViewModel = ViewModelProvider(this)[RoomViewModel::class.java]
-
+        roomViewModel = ViewModelProvider(this, RoomViewModel.Factory)[RoomViewModel::class.java]
         // Observe rooms data
         roomViewModel.rooms.observe(viewLifecycleOwner) { rooms ->
             // Update RecyclerView adapter with new data
