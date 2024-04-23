@@ -13,6 +13,7 @@
     <color name="window_background_color">#FFFFFF</color>
     <color name="grey_color">#F2F2F2</color>
     <color name="primary_blue">#003049</color>
+    <color name="accent_color">#076FBA</color>
     <color name="secondary_blue">#138AF2</color>
     <color name="primary_amber">#F2A922</color>
     <color name="border_color">#C7D7F2</color>
