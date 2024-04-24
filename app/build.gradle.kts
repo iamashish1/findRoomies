@@ -71,6 +71,9 @@ dependencies {
     //for livedata
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
 
+    //splash screen
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
     implementation("io.coil-kt:coil:2.6.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

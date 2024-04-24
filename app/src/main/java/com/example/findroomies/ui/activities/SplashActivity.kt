@@ -2,6 +2,7 @@ package com.example.findroomies.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.viewpager2.widget.ViewPager2
 import com.example.findroomies.R
 import com.example.findroomies.ui.adapters.PagerAdapter
