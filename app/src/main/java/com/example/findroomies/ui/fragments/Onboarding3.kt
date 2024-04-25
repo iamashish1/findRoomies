@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.navigation.findNavController
 import com.example.findroomies.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +23,7 @@ class Onboarding3 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var nextButton:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +37,19 @@ class Onboarding3 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_onboarding3, container, false)
+       val view= inflater.inflate(R.layout.fragment_onboarding3, container, false)
+        nextButton= view.findViewById(R.id.next)
+   return  view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        nextButton.setOnClickListener{
+            it.findNavController().navigate(R.id.action_onboardingsFragment_to_signInFragment)
+        }
+
     }
 
     companion object {

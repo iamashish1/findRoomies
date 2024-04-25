@@ -4,8 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.findroomies.ui.fragments.FavoriteFragment
 import com.example.findroomies.ui.fragments.MessageFragment
@@ -23,12 +25,14 @@ class HomeActivity : AppCompatActivity(), OnRoomItemClickInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
         // Find the included layout
-        val includeLayout = findViewById<View>(R.id.include)
-        val toolbar = includeLayout.findViewById<MaterialToolbar>(R.id.materialToolbar)
-        setSupportActionBar(toolbar)
+//        val includeLayout = findViewById<View>(R.id.include)
+//        val toolbar = includeLayout.findViewById<MaterialToolbar>(R.id.materialToolbar3)
+//        setSupportActionBar(toolbar)
+//        toolbar.title="Roomates"
+//        toolbar.textAlignment= View.TEXT_ALIGNMENT_CENTER
         //LOAD DEFAULT FRAGMENT
-        loadFragment(HomeFragment())
         bottomNav = findViewById(R.id.bottomNav)
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
@@ -71,24 +75,13 @@ class HomeActivity : AppCompatActivity(), OnRoomItemClickInterface {
         startActivity(intent)
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle item selection
-////        return when (item.itemId) {
-////            R.id.action_settings -> {
-////                // Handle search action
-////                true
-////            }
-////            // Add cases for other menu items as needed
-////            else -> super.onOptionsItemSelected(item)
-////        }
+
+
+
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.home_appbar_menu_items, menu)
+//        return true
 //    }
-
-
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.home_appbar_menu_items, menu)
-        return true
-    }
 
     private  fun loadFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
