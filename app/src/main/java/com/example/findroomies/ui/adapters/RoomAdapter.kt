@@ -19,21 +19,21 @@ class RoomAdapter(
 
     inner class RoomViewHolder(roomView: View): RecyclerView.ViewHolder(roomView){
          var tvTitle: TextView
-         var tvAddress: TextView
+//         var tvAddress: TextView
          var ivRoomImage: ImageView
-         var tvRent: TextView
-         var tvUtility: TextView
-         var tvFurnishing: TextView
-         var tvHouseType: TextView
+//         var tvRent: TextView
+//         var tvUtility: TextView
+//         var tvFurnishing: TextView
+//         var tvHouseType: TextView
 
         init {
-            tvTitle = roomView.findViewById(R.id.TitleId)
-            tvAddress = roomView.findViewById(R.id.AddressId)
-            tvRent= roomView.findViewById(R.id.priceId)
-            ivRoomImage= roomView.findViewById(R.id.imageView)
-            tvUtility= roomView.findViewById(R.id.utilityId)
-            tvFurnishing= roomView.findViewById(R.id.furnishId)
-            tvHouseType= roomView.findViewById(R.id.houseTypeId)
+            tvTitle = roomView.findViewById(R.id.titleId)
+//            tvAddress = roomView.findViewById(R.id.AddressId)
+//            tvRent= roomView.findViewById(R.id.priceId)
+            ivRoomImage= roomView.findViewById(R.id.ivRoomImage)
+//            tvUtility= roomView.findViewById(R.id.utilityId)
+//            tvFurnishing= roomView.findViewById(R.id.furnishId)
+//            tvHouseType= roomView.findViewById(R.id.houseTypeId)
 
 
 
@@ -71,23 +71,23 @@ class RoomAdapter(
         holder.ivRoomImage.load(rooms[position].imageUrl) {
             // Optionally, you can configure Coil's image loading options here
             placeholder(R.drawable.flat_button) // Placeholder drawable while loading
-            error(R.drawable.ic_launcher_background) // Error drawable if loading fails
+            error(R.drawable.placeholder_image) // Error drawable if loading fails
             crossfade(true) // Enable crossfade animation
             // And more options...
         }
 
 
         holder.tvTitle.text = rooms[position].title
-        holder.tvAddress.text = rooms[position].address
-        holder.tvRent.text = rooms[position].rent
-        holder.tvUtility.text = if (rooms[position].isUtilityIncluded) {
-            "Utility Included"
-        } else {
-            "Utility Not Included"
-        }
-
-        holder.tvFurnishing.text = rooms[position].furnishingType.toString()
-        holder.tvHouseType.text = rooms[position].houseType.toString()
+//        holder.tvAddress.text = rooms[position].address
+//        holder.tvRent.text = rooms[position].rent
+//        holder.tvUtility.text = if (rooms[position].isUtilityIncluded) {
+//            "Utility Included"
+//        } else {
+//            "Utility Not Included"
+//        }
+//
+//        holder.tvFurnishing.text = rooms[position].furnishingType.toString()
+//        holder.tvHouseType.text = rooms[position].houseType.toString()
 
     }
 
