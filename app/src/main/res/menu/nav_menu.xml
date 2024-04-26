@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
     <item
         android:id="@+id/home"
-        android:icon="@drawable/round_home_20"
+        android:icon="@drawable/home_bottom_icon"
+
         android:title="Home"  />
     <item
         android:id="@+id/fav"
-        android:icon="@drawable/round_favorite_20"
+        android:icon="@drawable/chat_bottom_icon"
         android:title="Favorite" />
     <item
         android:id="@+id/message"
-        android:icon="@drawable/round_send_20"
+        android:icon="@drawable/notification_bottom_icon"
         android:title="Message" />
     <item
         android:id="@+id/profile"
-        android:icon="@drawable/profile_icon"
+        android:icon="@drawable/profile_bottom_icon"
         android:title="Profile" />
 </menu>
