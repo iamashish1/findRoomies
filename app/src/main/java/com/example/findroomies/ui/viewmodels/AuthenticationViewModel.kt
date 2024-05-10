@@ -11,13 +11,13 @@ class AuthenticationViewModel: ViewModel() {
 
     fun onSubmitClicked() {
         // Handle submit action
-        println("SIGN IN BUTTON CLICKED")
+        println("SIGN IN BUTTON CLICKED ${emailText.get()} ${passwordText.get()}")
+
     }
 
     fun isValidInput(): Boolean {
         val inputEm = emailText.get() ?: return false
         val inputPass = passwordText.get() ?: return false
-
 
         return inputEm.isNotEmpty() && inputPass.isNotEmpty()
     }

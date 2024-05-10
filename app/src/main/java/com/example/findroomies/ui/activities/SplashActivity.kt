@@ -24,7 +24,9 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen() // Call before setting content view
        binding = ActivitySplashBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+
 
 
 

@@ -6,10 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import com.example.findroomies.R
+import com.example.findroomies.databinding.FragmentSignInBinding
+import com.example.findroomies.ui.viewmodels.AuthenticationViewModel
 
 class SignInFragment : Fragment() {
-
+    private lateinit var binding: FragmentSignInBinding
+    private lateinit var viewModel: AuthenticationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,14 +24,20 @@ class SignInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_in, container, false)
+        return binding.root
 
-        return inflater.inflate(R.layout.fragment_sign_in, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val signUpText = view.findViewById<TextView>(R.id.sign_up_text)
+
+
+        viewModel = AuthenticationViewModel()
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
 
         signUpText.setOnClickListener {
