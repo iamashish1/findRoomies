@@ -16,6 +16,11 @@ class RoomAdapter(
     private var clickInterface: OnRoomItemClickInterface
 ): RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
 
+    override fun getItemViewType(position: Int): Int {
+        //FOR THE TYPE OF VIEW FOR ELEMEnt AT POSitiON
+        return super.getItemViewType(position)
+    }
+
 
     inner class RoomViewHolder(roomView: View): RecyclerView.ViewHolder(roomView){
          var tvTitle: TextView

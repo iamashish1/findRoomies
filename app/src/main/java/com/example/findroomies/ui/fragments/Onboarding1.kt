@@ -1,37 +1,33 @@
 package com.example.findroomies.ui.fragments
 
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.findroomies.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Onboarding1.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Onboarding1 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var nextButton: TextView
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +35,15 @@ class Onboarding1 : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_onboarding1, container, false)
         nextButton = view.findViewById(R.id.next) // Replace with your button's ID
-        return view
+        val isOnboarded= isUserOnboarded()
+      return  if(isOnboarded){
+            requireActivity().findNavController(R.id.fragmentContainerView2).navigate(R.id.action_onboardingsFragment_to_signInFragment)
+            return null
+        }else{
+
+            view
+        }
+
 
     }
 
@@ -48,26 +52,24 @@ class Onboarding1 : Fragment() {
         nextButton.setOnClickListener {
             val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
             viewPager?.setCurrentItem(viewPager.currentItem + 1, true)
+            //AND THEM SET USER ONBOARDED TO TRUE NO MATTER WHAT ACTION THE USER TAKES
+            setUserOnboarded()
+        }
+    }
+    private fun isUserOnboarded(): Boolean {
+        val sharedPref = requireActivity().getSharedPreferences("onboarding_status", MODE_PRIVATE)
+        return sharedPref.getBoolean("onboarded", false)
+    }
+
+    private fun setUserOnboarded() {
+        val sharedPref = requireActivity().getSharedPreferences("onboarding_status", MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putBoolean("onboarded", true)
+            apply()
         }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Onboarding1.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Onboarding1().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
+
+
 }

@@ -19,6 +19,12 @@
             android:name=".ui.activities.SplashActivity"
             android:theme="@style/Theme.App.SplashScreen"
             android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".ui.activities.RoomDetailActivity"
@@ -26,10 +32,8 @@
         <activity
             android:name=".ui.activities.HomeActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+
         </activity>
         <activity
             android:name=".ui.activities.MainActivity"

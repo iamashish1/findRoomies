@@ -47,15 +47,16 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface {
         return view
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize ViewModel
         roomViewModel = ViewModelProvider(this, RoomViewModel.Factory)[RoomViewModel::class.java]
         // Observe rooms data
-        roomViewModel.rooms.observe(viewLifecycleOwner) { rooms ->
+        roomViewModel.rooms.observe(viewLifecycleOwner) {
             // Update RecyclerView adapter with new data
-            roomAdapter.updateRooms(rooms)
+            roomAdapter.updateRooms(it)
             loadingIndicator.visibility = View.GONE
         }
 
