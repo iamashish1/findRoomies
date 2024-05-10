@@ -13,7 +13,7 @@ This is an app developed in Kotlin(Android). This app focuses on the problem peo
 - sharedpreferences for persistence
 - Viewpager
 - Navigation Component
-- data binging
+- data binding
 
 
 # App's user interface
