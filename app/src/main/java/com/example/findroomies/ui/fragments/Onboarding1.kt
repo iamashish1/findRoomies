@@ -11,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.findroomies.R
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class Onboarding1 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null

@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.findroomies.R
 import com.example.findroomies.ui.adapters.PagerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class OnboardingsFragment : Fragment() {
 
 

@@ -13,9 +13,10 @@ import com.example.findroomies.databinding.ActivityMainBinding
 import com.example.findroomies.databinding.ActivitySplashBinding
 import com.example.findroomies.ui.adapters.PagerAdapter
 import com.example.findroomies.ui.viewmodels.AuthenticationViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
-
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding

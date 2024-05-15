@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.findroomies.R
 import com.example.findroomies.databinding.FragmentSignInBinding
 import com.example.findroomies.ui.viewmodels.AuthenticationViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
     private lateinit var viewModel: AuthenticationViewModel
@@ -37,8 +40,8 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(this)[AuthenticationViewModel::class.java]
 
-        viewModel = AuthenticationViewModel()
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 

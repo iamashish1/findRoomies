@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.findroomies.R
 import com.example.findroomies.databinding.FragmentSignInBinding
 import com.example.findroomies.databinding.FragmentSignUpBinding
 import com.example.findroomies.ui.viewmodels.AuthenticationViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var viewModel: AuthenticationViewModel
@@ -35,7 +37,7 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val signInText = view.findViewById<TextView>(R.id.sign_in_text)
-        viewModel = AuthenticationViewModel()
+        viewModel = ViewModelProvider(this)[AuthenticationViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         signInText.setOnClickListener{

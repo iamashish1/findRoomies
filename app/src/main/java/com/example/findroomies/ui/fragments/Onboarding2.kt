@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.findroomies.R
+import dagger.hilt.android.AndroidEntryPoint
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,6 +20,8 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Onboarding2.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
+
 class Onboarding2 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
