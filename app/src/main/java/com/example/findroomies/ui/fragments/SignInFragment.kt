@@ -10,10 +10,14 @@ import androidx.databinding.DataBindingUtil
 import com.example.findroomies.R
 import com.example.findroomies.databinding.FragmentSignInBinding
 import com.example.findroomies.ui.viewmodels.AuthenticationViewModel
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
     private lateinit var viewModel: AuthenticationViewModel
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +36,6 @@ class SignInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val signUpText = view.findViewById<TextView>(R.id.sign_up_text)
 
 
         viewModel = AuthenticationViewModel()
@@ -40,7 +43,7 @@ class SignInFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
 
-        signUpText.setOnClickListener {
+        binding.signUpText.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
             val signUpFragment = SignUpFragment()
             val transaction = fragmentManager.beginTransaction()
