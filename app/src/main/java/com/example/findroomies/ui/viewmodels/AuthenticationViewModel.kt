@@ -1,25 +1,23 @@
 package com.example.findroomies.ui.viewmodels
 
 import android.util.Log
+import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.findroomies.listeners.ToastMessageListener
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthenticationViewModel @Inject constructor(private val auth:FirebaseAuth): ViewModel() {
+class AuthenticationViewModel @Inject constructor(private val auth:FirebaseAuth, private val toastListner:ToastMessageListener): ViewModel() {
 
      val emailText = ObservableField<String>("")
      val passwordText = ObservableField<String>("")
      val nameText= ObservableField<String>("")
 
-
-
     fun onSubmitClicked(isLogin:Boolean) {
-        println("CLICKED")
-        // Handle submit action
         if(isLogin){
             val email = emailText.get()
             val password = passwordText.get()
@@ -31,20 +29,11 @@ class AuthenticationViewModel @Inject constructor(private val auth:FirebaseAuth)
             auth.signInWithEmailAndPassword(emailText.get()?:"", passwordText.get()?:"")
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                       println("UUSER LOGIN SUCCESSFUL")
-
-//                        val user = auth.currentUser
-//                        updateUI(user)
+                        toastListner.showToast("Login Successful")
                     } else {
-                        // If sign in fails, display a message to the user.
-//                        Log.w(TAG, "signInWithEmail:failure", task.exception)
-//                        Toast.makeText(
-//                            baseContext,
-//                            "Authentication failed.",
-//                            Toast.LENGTH_SHORT,
-//                        ).show()
-//                        updateUI(null)
+                        val exception = task.exception
+                        toastListner.showToast("Login Failed: ${exception?.message}")
+
                     }
                 }
 
