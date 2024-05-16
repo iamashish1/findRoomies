@@ -1,26 +1,19 @@
 package com.example.findroomies.ui.fragments
 
-import android.app.Activity
-import android.content.Context
-import android.health.connect.datatypes.units.Length
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.findroomies.R
 import com.example.findroomies.databinding.FragmentSignInBinding
-import com.example.findroomies.listeners.ToastMessageListener
+import com.example.findroomies.ui.activities.HomeActivity
 import com.example.findroomies.ui.viewmodels.AuthenticationViewModel
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
@@ -51,6 +44,19 @@ class SignInFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        viewModel.getNavigateToHomeActivity()?.observe(requireActivity()) { navigate ->
+            if (navigate) {
+                val intent = Intent(requireContext(), HomeActivity::class.java)
+                startActivity(intent).let {
+                    // Reset the value to prevent re-triggering
+                    viewModel.setNavigateValue(false)
+
+                }
+               requireActivity().finish()
+
+            }
+        }
 
 
         binding.signUpText.setOnClickListener {

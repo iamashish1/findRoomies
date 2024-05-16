@@ -1,5 +1,6 @@
 package com.example.findroomies.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.findroomies.R
 import com.example.findroomies.databinding.FragmentSignInBinding
 import com.example.findroomies.databinding.FragmentSignUpBinding
+import com.example.findroomies.ui.activities.HomeActivity
 import com.example.findroomies.ui.viewmodels.AuthenticationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,6 +42,20 @@ class SignUpFragment : Fragment() {
         viewModel = ViewModelProvider(this)[AuthenticationViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        viewModel.getNavigateToHomeActivity()?.observe(requireActivity()) { navigate ->
+            if (navigate) {
+                val intent = Intent(requireContext(), HomeActivity::class.java)
+                startActivity(intent).let {
+                    // Reset the value to prevent re-triggering
+                    viewModel.setNavigateValue(false)
+
+                }
+                requireActivity().finish()
+
+            }
+        }
+
         signInText.setOnClickListener{
             val fragmentManager = requireActivity().supportFragmentManager
             val signInFragemnt = SignInFragment()

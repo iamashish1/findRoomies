@@ -73,14 +73,13 @@ class RoomAdapter(
 //        }
         // OR
         // Load image into ImageView using Coil
-        holder.ivRoomImage.load(rooms[position].imageUrl) {
+        holder.ivRoomImage.load(rooms[position].imageUrl?.get(0) ?:"") {
             // Optionally, you can configure Coil's image loading options here
             placeholder(R.drawable.flat_button) // Placeholder drawable while loading
             error(R.drawable.placeholder_image) // Error drawable if loading fails
             crossfade(true) // Enable crossfade animation
             // And more options...
         }
-
 
         holder.tvTitle.text = rooms[position].title
 //        holder.tvAddress.text = rooms[position].address

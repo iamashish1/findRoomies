@@ -27,29 +27,28 @@ class SplashActivity @Inject constructor()  : AppCompatActivity(), ToastMessageL
     private lateinit var binding: ActivitySplashBinding
     @Inject
     lateinit var auth: FirebaseAuth
-//    public override fun onStart() {
-//        super.onStart()
-//        val currentUser = auth.currentUser
-//        if (currentUser != null) {
-//            val intent = Intent(this, HomeActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
-//    }
+    public override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen() // Call before setting content view
+        installSplashScreen()
        binding = ActivitySplashBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
 
 
-
     }
 
     override fun showToast(message: String) {
-        Toast.makeText(this,"MESSAGE", Toast.LENGTH_SHORT)
+//        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
 
     }
 

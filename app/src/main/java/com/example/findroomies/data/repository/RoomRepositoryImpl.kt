@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.findroomies.data.model.FurnishingType
 import com.example.findroomies.data.model.PropertyType
 import com.example.findroomies.data.model.RoomModel
+import com.example.findroomies.data.model.UserModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
@@ -21,12 +22,15 @@ class RoomRepositoryImpl : RoomRepository {
                     title = document.getString("title") ?: "",
                     address = document.getString("address") ?: "",
                     rent = document.getString("rent") ?: "",
-                    imageUrl = document.getString("imageUrl") ?: "",
+                    imageUrl = document.get("imageUrl")  as List<String?>?,
                     furnishingType = document.get("furnishingType", FurnishingType::class.java)
                         ?: FurnishingType.UNKNOWN,
                     isUtilityIncluded = document.getBoolean("isUtilityIncluded") ?: false,
                     houseType = document.get("houseType", PropertyType::class.java)
-                        ?: PropertyType.UNKNOWN
+                        ?: PropertyType.UNKNOWN,
+                    addedBy = document.get("addedBy", UserModel::class.java),
+                    bookmarkedBy = document.get("bookmarkedBy") as List<String?>?,
+                    timestamps = document.getTimestamp("timestamps")
                 )
                 rooms.add(room)
             }
