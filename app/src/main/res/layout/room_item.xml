@@ -10,7 +10,7 @@
 
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/addedByText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
@@ -21,27 +21,27 @@
         app:layout_constraintTop_toTopOf="@+id/imageView15" />
 
     <TextView
-        android:id="@+id/textView28"
+        android:id="@+id/timeAddedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="30 minutes ago"
-        app:layout_constraintEnd_toStartOf="@+id/textView29"
-        app:layout_constraintStart_toStartOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintEnd_toStartOf="@+id/rentText"
+        app:layout_constraintStart_toStartOf="@+id/addedByText"
+        app:layout_constraintTop_toBottomOf="@+id/addedByText" />
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/rentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="$300/m"
         android:textColor="@color/accent_color"
-        app:layout_constraintStart_toEndOf="@+id/textView28"
-        app:layout_constraintTop_toTopOf="@+id/textView28" />
+        app:layout_constraintStart_toEndOf="@+id/timeAddedText"
+        app:layout_constraintTop_toTopOf="@+id/timeAddedText" />
 
     <TextView
         android:id="@+id/titleId"
@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/descriptionText"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginEnd="20dp"
@@ -79,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText"
         app:srcCompat="@drawable/placeholder_image" />
 
     <ImageView

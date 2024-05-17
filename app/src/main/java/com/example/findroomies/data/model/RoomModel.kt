@@ -6,6 +6,7 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 data class RoomModel (
     val id:String,
     val title:String,
+    val description:String,
     val address:String,
     val rent: String,
     val addedBy: UserModel?,

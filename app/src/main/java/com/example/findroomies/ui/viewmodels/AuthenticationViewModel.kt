@@ -59,7 +59,7 @@ class AuthenticationViewModel @Inject constructor(private val auth:FirebaseAuth,
                     if (task.isSuccessful) {
                         setNavigateValue(true)
                         val userId =
-                            auth.currentUser!!.uid // Get user ID after successful registration
+                            auth.currentUser!!.uid
 
                         saveUserDataToFirestore(email,name, userId)
                         println("Registered ")

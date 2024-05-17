@@ -30,7 +30,8 @@ class RoomRepositoryImpl : RoomRepository {
                         ?: PropertyType.UNKNOWN,
                     addedBy = document.get("addedBy", UserModel::class.java),
                     bookmarkedBy = document.get("bookmarkedBy") as List<String?>?,
-                    timestamps = document.getTimestamp("timestamps")
+                    timestamps = document.getTimestamp("timestamps"),
+                    description = document.getString("description") ?:""
                 )
                 rooms.add(room)
             }
