@@ -56,7 +56,7 @@ class RoomAdapter(
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     //NOTE: This click listener can also be set in onBindViewHolder
-                    clickInterface.onRoomItemClick(rooms[position])
+                    clickInterface.onRoomItemClick(rooms[position]?.id?:"")
                 }
             }
 
@@ -125,19 +125,6 @@ class RoomAdapter(
 
 
         holder.timeAdded.text= timeAddedText
-
-
-//        holder.tvAddress.text = rooms[position].address
-//        holder.tvRent.text = rooms[position].rent
-//        holder.tvUtility.text = if (rooms[position].isUtilityIncluded) {
-//            "Utility Included"
-//        } else {
-//            "Utility Not Included"
-//        }
-//
-//        holder.tvFurnishing.text = rooms[position].furnishingType.toString()
-//        holder.tvHouseType.text = rooms[position].houseType.toString()
-
     }
 
     fun updateRooms(newRooms: List<RoomModel>) {

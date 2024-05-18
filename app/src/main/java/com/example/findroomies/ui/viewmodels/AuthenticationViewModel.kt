@@ -48,6 +48,7 @@ class AuthenticationViewModel @Inject constructor(private val auth:FirebaseAuth,
                         setNavigateValue(true)
                     } else {
                         val exception = task.exception
+                        toastListner.showToast(exception?.message?:"")
 
                     }
                 }

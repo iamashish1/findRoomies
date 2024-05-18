@@ -11,6 +11,20 @@ import kotlinx.coroutines.tasks.await
 
 class RoomRepositoryImpl : RoomRepository {
     private val db = FirebaseFirestore.getInstance()
+    override suspend fun getRoomDetail(documentId:String): RoomModel? {
+        return try {
+            val docRef = db.collection("Rooms").document("$documentId")
+            val document = docRef.get().await()
+            if (document.exists()) {
+                // Assuming the document data can be converted to RoomModel
+                document.toObject(RoomModel::class.java)
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+           throw e
+        }
+    }
 
     override suspend fun getRooms(): List<RoomModel> {
         val rooms = mutableListOf<RoomModel>()

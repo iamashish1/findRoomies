@@ -14,7 +14,7 @@ import com.example.findroomies.data.model.RoomModel
 import com.example.findroomies.ui.fragments.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeActivity : AppCompatActivity(), OnRoomItemClickInterface {
+class HomeActivity : AppCompatActivity() {
     private lateinit var bottomNav : BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,20 +55,8 @@ class HomeActivity : AppCompatActivity(), OnRoomItemClickInterface {
                 }
             }
         }
-
-
-
-
-
-
     }
 
-    override fun onRoomItemClick(room: RoomModel) {
-        val intent = Intent(this, RoomDetailActivity::class.java)
-        Log.d("LOG CLICK",room.address)
-        Log.d("LOG CLICK TITLE",room.title)
-        startActivity(intent)
-    }
 
 
 

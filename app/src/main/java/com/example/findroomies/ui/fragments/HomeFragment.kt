@@ -50,7 +50,6 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         // Initialize ViewModel
         roomViewModel = ViewModelProvider(this, RoomViewModel.Factory)[RoomViewModel::class.java]
         // Observe rooms data
@@ -70,9 +69,13 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface {
         }
     }
 
-    override fun onRoomItemClick(room: RoomModel) {
+    override fun onRoomItemClick(documentId: String) {
         // Handle item click, if needed
         val intent = Intent(requireActivity(), RoomDetailActivity::class.java)
+        val bundle = Bundle().apply {
+            putString("DOCUMENT_ID", documentId)
+        }
+        intent.putExtras(bundle)
         startActivity(intent)
     }
 }

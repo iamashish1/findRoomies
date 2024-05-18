@@ -3,5 +3,5 @@ package com.example.findroomies.listeners
 import com.example.findroomies.data.model.RoomModel
 
 public interface OnRoomItemClickInterface {
-    fun onRoomItemClick(room: RoomModel)
+    fun onRoomItemClick(documentId: String)
 }

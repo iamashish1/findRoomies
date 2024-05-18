@@ -41,7 +41,7 @@ class SignUpFragment : Fragment() {
         val signInText = view.findViewById<TextView>(R.id.sign_in_text)
         viewModel = ViewModelProvider(this)[AuthenticationViewModel::class.java]
         binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = requireActivity()
 
         viewModel.getNavigateToHomeActivity()?.observe(requireActivity()) { navigate ->
             if (navigate) {
@@ -52,6 +52,7 @@ class SignUpFragment : Fragment() {
 
                 }
                 requireActivity().finish()
+
 
             }
         }

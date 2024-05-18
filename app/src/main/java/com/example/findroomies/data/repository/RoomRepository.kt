@@ -4,6 +4,8 @@ import com.example.findroomies.data.model.RoomModel
 
 
 interface RoomRepository {
+
+    suspend fun getRoomDetail(documentId:String): RoomModel?
     suspend fun getRooms(): List<RoomModel>
     suspend fun addRoom(room: RoomModel)
     suspend fun updateRoom(room: RoomModel)

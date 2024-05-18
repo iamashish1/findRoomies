@@ -3,20 +3,25 @@ package com.example.findroomies.data.model
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.IgnoreExtraProperties
 
+@IgnoreExtraProperties
 data class RoomModel (
-    val id:String,
-    val title:String,
-    val description:String,
-    val address:String,
-    val rent: String,
-    val addedBy: UserModel?,
-    val timestamps: Timestamp?,
-    val bookmarkedBy: List<String?>?,
-    val imageUrl: List<String?>?,
-    val isUtilityIncluded:Boolean,
-    val furnishingType: FurnishingType,
-    val houseType: PropertyType
-)
+    val id:String?=null,
+    val title:String?=null,
+    val description:String?=null,
+    val address:String?=null,
+    val rent: String?=null,
+    val addedBy: UserModel?=null,
+    val timestamps: Timestamp?=null,
+    val bookmarkedBy: List<String?>?=null,
+    val imageUrl: List<String?>?=null,
+    val isUtilityIncluded:Boolean?=null,
+    val furnishingType: FurnishingType?=null,
+    val houseType: PropertyType?=null
+) {
+    // Null default values create a no-argument default constructor, which is needed
+    // for deserialization from a DataSnapshot.
+}
+
 
 //data class UserModel(
 //    val userId:  String?,

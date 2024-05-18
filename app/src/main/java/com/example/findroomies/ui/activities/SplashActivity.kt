@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -27,6 +28,7 @@ class SplashActivity @Inject constructor()  : AppCompatActivity(), ToastMessageL
     private lateinit var binding: ActivitySplashBinding
     @Inject
     lateinit var auth: FirebaseAuth
+
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
@@ -40,15 +42,11 @@ class SplashActivity @Inject constructor()  : AppCompatActivity(), ToastMessageL
         super.onCreate(savedInstanceState)
         installSplashScreen()
        binding = ActivitySplashBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
-
-
-
     }
 
     override fun showToast(message: String) {
-//        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
 
     }
 

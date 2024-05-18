@@ -18,15 +18,31 @@ class RoomViewModel(private val repository: RoomRepository) : ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
 
+    //GET SINGLE ROOM
+    private val _singleRoom = MutableLiveData<RoomModel?>()
+    val singleRoom: LiveData<RoomModel?> get() = _singleRoom
+
     init {
         getRooms()
     }
 
+
+//GET THE LIST OF ALL ROOMS
     private fun getRooms() {
         viewModelScope.launch {
             _loading.value = true
             val roomList = repository.getRooms()
             _rooms.value = roomList
+            _loading.value = false
+        }
+    }
+
+    //GET SINGLE ROOM
+    fun getRoomDetail(documentId: String) {
+        viewModelScope.launch {
+            _loading.value = true
+            val roomDetail = repository.getRoomDetail(documentId)
+            _singleRoom.value = roomDetail
             _loading.value = false
         }
     }

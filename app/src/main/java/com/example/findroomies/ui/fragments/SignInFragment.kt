@@ -43,7 +43,7 @@ class SignInFragment : Fragment() {
         viewModel = ViewModelProvider(this)[AuthenticationViewModel::class.java]
 
         binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = requireActivity()
 
         viewModel.getNavigateToHomeActivity()?.observe(requireActivity()) { navigate ->
             if (navigate) {
