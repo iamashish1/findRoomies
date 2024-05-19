@@ -6,10 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.findroomies.data.model.MessageListModel
 import com.example.findroomies.databinding.MessageItemBinding
 import com.example.findroomies.databinding.RoomItemBinding
+import com.example.findroomies.listeners.MessageClickListener
+import com.example.findroomies.listeners.OnRoomItemClickInterface
 import com.example.findroomies.ui.viewholder.MessageListViewHolder
 import com.google.firebase.auth.FirebaseAuth
 
-class MessageListAdapter(private val messages: List<MessageListModel>) : RecyclerView.Adapter<MessageListViewHolder>(){
+class MessageListAdapter(private val messages: List<MessageListModel>,
+                         private var clickListener: MessageClickListener
+
+) : RecyclerView.Adapter<MessageListViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageListViewHolder {
         val binding = MessageItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return  MessageListViewHolder(binding)
@@ -27,6 +32,11 @@ class MessageListAdapter(private val messages: List<MessageListModel>) : Recycle
         }else{
             holder.binding?.name?.text = messages[position].receiver?.name
             holder.binding?.lastMessage?.text = messages[position].lastMessage
+
+        }
+
+        holder.binding.root.setOnClickListener(){
+            clickListener.onMessageItemClick(messages[position]?.id?:"")
 
         }
 

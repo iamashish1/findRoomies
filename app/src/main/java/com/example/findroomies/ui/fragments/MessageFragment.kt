@@ -1,5 +1,6 @@
 package com.example.findroomies.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +12,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.findroomies.R
 import com.example.findroomies.data.model.MessageListModel
 import com.example.findroomies.databinding.FragmentMessageBinding
+import com.example.findroomies.listeners.MessageClickListener
+import com.example.findroomies.ui.activities.ChatActivity
+import com.example.findroomies.ui.activities.RoomDetailActivity
 import com.example.findroomies.ui.adapters.MessageListAdapter
 import com.example.findroomies.ui.adapters.RoomAdapter
 import com.example.findroomies.ui.viewmodels.MessageViewModel
 import com.example.findroomies.ui.viewmodels.RoomViewModel
 
 
-class MessageFragment : Fragment() {
+class MessageFragment : Fragment(), MessageClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var mAdapter: MessageListAdapter
@@ -31,7 +35,7 @@ private  var messages:MutableList<MessageListModel> = mutableListOf()
         recyclerView = view.findViewById(R.id.messageListRv)
         val fragmentContext = requireContext()
 
-        mAdapter = MessageListAdapter(messages)
+        mAdapter = MessageListAdapter(messages,this)
         recyclerView.adapter = mAdapter
         recyclerView.layoutManager = LinearLayoutManager(fragmentContext)
 
@@ -49,6 +53,15 @@ private  var messages:MutableList<MessageListModel> = mutableListOf()
             mAdapter.notifyDataSetChanged()
 
         }
+    }
+
+    override fun onMessageItemClick(documentId: String) {
+        val intent = Intent(requireActivity(), ChatActivity::class.java)
+        val bundle = Bundle().apply {
+            putString("DOCUMENT_ID", documentId)
+        }
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 
 

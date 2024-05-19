@@ -7,4 +7,5 @@ import com.example.findroomies.databinding.RoomItemBinding
 class MessageListViewHolder(binding: MessageItemBinding) : RecyclerView.ViewHolder(binding.root){
      var binding: MessageItemBinding = binding
 
+
 }
