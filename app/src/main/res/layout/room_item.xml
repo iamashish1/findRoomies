@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="361dp"
-    android:layout_marginTop="20dp"
     android:background="@drawable/room_card_style"
+    android:layout_marginTop="20dp"
     android:padding="8dp">
-
 
     <TextView
         android:id="@+id/addedByText"
@@ -95,15 +94,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/placeholder_image" />
 
-    <ImageView
-        android:id="@+id/imageView17"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+    <ImageButton
+        android:id="@+id/messageButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        android:src="@drawable/message_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivRoomImage"
-        app:srcCompat="@drawable/message_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/ivRoomImage" />
 
     <TextView
         android:id="@+id/textView33"
@@ -114,19 +115,23 @@
         android:text="Message"
         android:textColor="@color/accent_color"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView17"
-        app:layout_constraintStart_toEndOf="@+id/imageView17"
-        app:layout_constraintTop_toTopOf="@+id/imageView17" />
+        app:layout_constraintBottom_toBottomOf="@+id/messageButton"
+        app:layout_constraintStart_toEndOf="@+id/messageButton"
+        app:layout_constraintTop_toTopOf="@+id/messageButton" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageView18"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:background="#00FFFFFF"
+
+        android:scaleType="fitXY"
+        android:src="@drawable/bookmark_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivRoomImage"
-        app:srcCompat="@drawable/bookmark_icon" />
+        />
 
     <TextView
         android:id="@+id/textView34"

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.example.findroomies.ui.fragments.MessageFragment
 import com.example.findroomies.ui.fragments.NotificationFragment
@@ -16,7 +17,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var bottomNav : BottomNavigationView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -27,6 +27,7 @@ class HomeActivity : AppCompatActivity() {
 //        setSupportActionBar(toolbar)
 //        toolbar.title="Roomates"
 //        toolbar.textAlignment= View.TEXT_ALIGNMENT_CENTER
+
         //LOAD DEFAULT FRAGMENT
         bottomNav = findViewById(R.id.bottomNav)
         bottomNav.setOnItemSelectedListener {
