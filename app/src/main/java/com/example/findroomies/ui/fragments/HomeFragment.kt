@@ -1,24 +1,27 @@
 package com.example.findroomies.ui.fragments
 
-import com.example.findroomies.ui.viewmodels.RoomViewModel
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-import com.example.findroomies.listeners.OnRoomItemClickInterface
 import com.example.findroomies.R
-import com.example.findroomies.ui.adapters.RoomAdapter
-import com.example.findroomies.ui.activities.RoomDetailActivity
-import com.example.findroomies.data.model.RoomModel
 import com.example.findroomies.listeners.ConversationClickListener
+import com.example.findroomies.listeners.OnRoomItemClickInterface
 import com.example.findroomies.ui.activities.ChatActivity
+import com.example.findroomies.ui.activities.RoomDetailActivity
+import com.example.findroomies.ui.adapters.RoomAdapter
+import com.example.findroomies.ui.viewmodels.RoomViewModel
+
 
 /**
  * A simple [Fragment] subclass.
@@ -52,16 +55,31 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface, ConversationClickList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Initialize ViewModel
         roomViewModel = ViewModelProvider(this, RoomViewModel.Factory)[RoomViewModel::class.java]
-        // Observe rooms data
         roomViewModel.rooms.observe(viewLifecycleOwner) {
-            // Update RecyclerView adapter with new data
             roomAdapter.updateRooms(it)
             loadingIndicator.visibility = View.GONE
         }
+        //USE TEXTWATCHER TO WATCH CHANGES
+        val textWatcher: TextWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // this function is called before text is edited
 
-        // Observe loading state
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                roomViewModel.filterRooms(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                // this function is called after text is edited
+            }
+        }
+
+        val search=view.findViewById<EditText>(R.id.editTextText1) // textWatcher is for watching any changes in editText
+        search.addTextChangedListener(textWatcher)
+
+
         roomViewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 loadingIndicator.visibility = View.VISIBLE
@@ -69,10 +87,11 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface, ConversationClickList
                 loadingIndicator.visibility = View.GONE
             }
         }
+
+
     }
 
     override fun onRoomItemClick(documentId: String) {
-        // Handle item click, if needed
         val intent = Intent(requireActivity(), RoomDetailActivity::class.java)
         val bundle = Bundle().apply {
             putString("DOCUMENT_ID", documentId)
@@ -82,7 +101,6 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface, ConversationClickList
     }
 
     override fun startConversation(receiver: String) {
-        // Handle item click, if needed
         val intent = Intent(requireActivity(), ChatActivity::class.java)
         val bundle = Bundle().apply {
             putString("RECEIVER_ID", receiver)
