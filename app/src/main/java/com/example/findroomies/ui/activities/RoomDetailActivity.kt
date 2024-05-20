@@ -1,5 +1,6 @@
 package com.example.findroomies.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -32,6 +33,8 @@ class RoomDetailActivity : AppCompatActivity() {
             finish()
         }
 
+
+
         // Observe ROOM DATA
         roomViewModel.singleRoom.observe(this) {
             // Update RecyclerView adapter with new data
@@ -48,6 +51,17 @@ class RoomDetailActivity : AppCompatActivity() {
         binding.address.text=room?.address
         binding.description.text=room?.description
         binding.propertyDetail.text=room?.houseType?.name?:""
+
+        binding.button2.setOnClickListener(){
+            val intent = Intent(this, ChatActivity::class.java)
+            val bundle = Bundle().apply {
+                putString("RECEIVER_ID", room?.addedBy?.userId?:"")
+            }
+            intent.putExtras(bundle)
+            startActivity(intent)
+            finish()
+        }
+
 
 
     }

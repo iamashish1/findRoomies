@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.findroomies.listeners.ToastMessageListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -62,7 +63,7 @@ class AuthenticationViewModel @Inject constructor(private val auth:FirebaseAuth,
                         val userId =
                             auth.currentUser!!.uid
 
-                        saveUserDataToFirestore(email,name, userId)
+                        saveUserDataToFirestore(email,name, userId,auth.currentUser)
                         println("Registered ")
                     } else {
                         val exception = task.exception
@@ -76,12 +77,22 @@ class AuthenticationViewModel @Inject constructor(private val auth:FirebaseAuth,
         }
     }
 
-    private fun saveUserDataToFirestore(email: String, name: String, userId: String) {
+    private fun saveUserDataToFirestore(email: String, name: String, userId: String, currentUser:FirebaseUser?) {
         // Create a user document with relevant data
-        val user: MutableMap<String, Any> = HashMap()
+        val user: MutableMap<String, Any?> = HashMap()
         user["email"] = email
         user["name"] = name
-        user["userId"] = userId // Add user ID to the document
+        user["userId"] = userId
+        user["isEmailVerified"]= currentUser?.isEmailVerified
+        user["profilePictureUrl"] = ""
+        user["phoneNumber"] = ""
+        user["address"] = mapOf(
+            "street" to "",
+            "city" to "",
+            "state" to "",
+            "zipCode" to ""
+        )
+        user["bio"] = ""
         // You can add more user data as needed
         val db = FirebaseFirestore.getInstance()
 

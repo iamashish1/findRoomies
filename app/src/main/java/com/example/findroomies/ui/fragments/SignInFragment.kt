@@ -47,13 +47,13 @@ class SignInFragment : Fragment() {
 
         viewModel.getNavigateToHomeActivity()?.observe(requireActivity()) { navigate ->
             if (navigate) {
-                val intent = Intent(requireContext(), HomeActivity::class.java)
-                startActivity(intent).let {
-                    // Reset the value to prevent re-triggering
-                    viewModel.setNavigateValue(false)
-
-                }
-               requireActivity().finish()
+//                val intent = Intent(requireContext(), HomeActivity::class.java)
+//                startActivity(intent).let {
+//                    // Reset the value to prevent re-triggering
+//                    viewModel.setNavigateValue(false)
+//
+//                }
+//               requireActivity().finish()
 
             }
         }

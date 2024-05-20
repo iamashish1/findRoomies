@@ -12,14 +12,28 @@ import com.example.findroomies.listeners.OnRoomItemClickInterface
 import com.example.findroomies.ui.fragments.ProfileFragment
 import com.example.findroomies.R
 import com.example.findroomies.data.model.RoomModel
+import com.example.findroomies.listeners.FirebaseAuthManager
 import com.example.findroomies.ui.fragments.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     private lateinit var bottomNav : BottomNavigationView
+    private val authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            val intent = Intent(this, SplashActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        FirebaseAuthManager.addAuthStateListener(authStateListener)
 
         // Find the included layout
 //        val includeLayout = findViewById<View>(R.id.include)

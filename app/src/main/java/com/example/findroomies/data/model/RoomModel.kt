@@ -51,3 +51,9 @@ enum class PropertyType {
 }
 
 
+@IgnoreExtraProperties
+data class FirebaseUserModel(val userId: String? = null, val name: String? = null,val email: String? = null,val imageUrl: String? = null,val phone:String?=null,val address:String?=null, val bio:String?=null) {
+    // Null default values create a no-argument default constructor, which is needed
+    // for deserialization from a DataSnapshot.
+}
+

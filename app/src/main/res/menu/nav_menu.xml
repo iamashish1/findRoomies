@@ -12,8 +12,8 @@
         android:title="Message" />
     <item
         android:id="@+id/message"
-        android:icon="@drawable/notification_bottom_icon"
-        android:title="Notifications" />
+        android:icon="@drawable/bookmark_bottom_icon"
+        android:title="Bookmarks" />
     <item
         android:id="@+id/profile"
         android:icon="@drawable/profile_bottom_icon"

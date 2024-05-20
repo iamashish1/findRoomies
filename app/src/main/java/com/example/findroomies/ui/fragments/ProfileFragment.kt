@@ -4,52 +4,67 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.findroomies.R
+import com.example.findroomies.databinding.FragmentProfileBinding
+import com.example.findroomies.ui.viewmodels.ProfileViewModel
+import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
+private lateinit  var  profileViewModel:ProfileViewModel
+private  lateinit var binding : FragmentProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString("ARG_PARAM1")
-            param2 = it.getString("ARG_PARAM2")
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+
+        binding = FragmentProfileBinding.inflate(inflater)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString("ARG_PARAM1", param1)
-                    putString("ARG_PARAM2", param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        profileViewModel= ViewModelProvider(this)[ProfileViewModel::class.java]
+        // In your activity or fragment
+
+        profileViewModel.profileData.observe(viewLifecycleOwner) { userProfile ->
+            userProfile?.let {user ->
+                // Update your UI with user profile data
+                binding.let {
+                    it.nameT.text=user.name
+                    it.emailT.text=user.email
+                    it.phoneT.text=user.phone
+                    it.addressT.text=user.address
+                    it.bioT.text=user.bio
+
                 }
+
+            } ?: run {
+                // Handle the case where user profile data is null
+                println("MAYBE YOU ARE UNAUTHENTICATED:")
+
             }
+        }
+
+        binding.logoutButton.setOnClickListener(){
+            FirebaseAuth.getInstance().signOut()
+
+        }
+
     }
+
+
 }
