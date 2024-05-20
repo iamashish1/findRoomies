@@ -24,5 +24,8 @@ This is an app developed in Kotlin(Android). This app focuses on the problem peo
 <img src="DemoImages/signup_screen.png" width="200">
 <img src="DemoImages/home_screen.png" width="200">
 <img src="DemoImages/room_detail_screen.png" width="200">
+  <img src="DemoImages/chat_image.png" width="200">
+
+
 </div>
 
