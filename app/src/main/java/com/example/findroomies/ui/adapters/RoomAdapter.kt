@@ -4,6 +4,7 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -14,6 +15,7 @@ import com.example.findroomies.R
 import com.example.findroomies.data.model.RoomModel
 import com.example.findroomies.databinding.FragmentHomeBinding
 import com.example.findroomies.databinding.RoomItemBinding
+import com.example.findroomies.listeners.ConversationClickListener
 import com.example.findroomies.ui.fragments.HomeFragment
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
@@ -25,7 +27,8 @@ import java.time.Period
 
 class RoomAdapter(
     private var rooms:MutableList<RoomModel>,
-    private var clickInterface: OnRoomItemClickInterface
+    private var clickInterface: OnRoomItemClickInterface,
+    private var startConversation: ConversationClickListener
 ): RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
@@ -35,6 +38,7 @@ class RoomAdapter(
 
     inner class RoomViewHolder(binding: RoomItemBinding): RecyclerView.ViewHolder(binding.root){
          var tvTitle: TextView
+         var messageButton: ImageButton
          var ivRoomImage: ImageView
          var tvRent: TextView
          var addedBy: TextView
@@ -42,7 +46,7 @@ class RoomAdapter(
          var timeAdded: TextView
 
         init {
-
+           messageButton=binding.messageButton
             addedBy= binding.addedByText
             tvRent= binding.rentText
             tvTitle= binding.titleId
@@ -50,6 +54,10 @@ class RoomAdapter(
             description= binding.descriptionText
             timeAdded= binding.timeAddedText
 
+
+            binding.messageButton.setOnClickListener(){
+                startConversation.startConversation(rooms[adapterPosition].addedBy?.userId?:"")
+            }
 
 
             binding.root.setOnClickListener {
@@ -116,7 +124,7 @@ class RoomAdapter(
 
             when {
 
-                hours>24 -> "${(hours%24).toInt()} day(s) ago"
+                hours>24 -> "${(hours/24).toInt()} day(s) ago"
                 hours > 0 -> "$hours hours ago"
                 hours < 1 && minutes>1 -> "$minutes minutes ago"
                 else -> "Just now"

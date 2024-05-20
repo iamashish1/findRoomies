@@ -9,8 +9,9 @@ data class MessageListModel(
     val id: String?=null,
     val lastMessage: String?=null,
     val participants: List<String>?=null,
-    val receiver: User?=null,
-    val sender: User?=null,
+    val p1:User?=null,
+    val p2:User?=null
+
 )
 
 

@@ -17,13 +17,15 @@ import com.example.findroomies.R
 import com.example.findroomies.ui.adapters.RoomAdapter
 import com.example.findroomies.ui.activities.RoomDetailActivity
 import com.example.findroomies.data.model.RoomModel
+import com.example.findroomies.listeners.ConversationClickListener
+import com.example.findroomies.ui.activities.ChatActivity
 
 /**
  * A simple [Fragment] subclass.
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment(), OnRoomItemClickInterface {
+class HomeFragment : Fragment(), OnRoomItemClickInterface, ConversationClickListener {
     private lateinit var roomAdapter: RoomAdapter
     private lateinit var roomViewModel: RoomViewModel
     private lateinit var loadingIndicator: ProgressBar
@@ -40,7 +42,7 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface {
         recyclerView = view.findViewById(R.id.recycler_view_id)
         val fragmentContext = requireContext()
 
-        roomAdapter = RoomAdapter(mutableListOf(), this)
+        roomAdapter = RoomAdapter(mutableListOf(),this, this)
         recyclerView.adapter = roomAdapter
         recyclerView.layoutManager = LinearLayoutManager(fragmentContext)
 
@@ -78,4 +80,17 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface {
         intent.putExtras(bundle)
         startActivity(intent)
     }
+
+    override fun startConversation(receiver: String) {
+        // Handle item click, if needed
+        val intent = Intent(requireActivity(), ChatActivity::class.java)
+        val bundle = Bundle().apply {
+            putString("RECEIVER_ID", receiver)
+        }
+        intent.putExtras(bundle)
+        startActivity(intent)
+
+    }
+
+
 }

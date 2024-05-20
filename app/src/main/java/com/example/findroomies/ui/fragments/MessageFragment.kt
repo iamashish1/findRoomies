@@ -58,7 +58,7 @@ private  var messages:MutableList<MessageListModel> = mutableListOf()
     override fun onMessageItemClick(documentId: String) {
         val intent = Intent(requireActivity(), ChatActivity::class.java)
         val bundle = Bundle().apply {
-            putString("DOCUMENT_ID", documentId)
+            putString("RECEIVER_ID", documentId)
         }
         intent.putExtras(bundle)
         startActivity(intent)

@@ -25,18 +25,25 @@ class MessageListAdapter(private val messages: List<MessageListModel>,
     }
 
     override fun onBindViewHolder(holder: MessageListViewHolder, position: Int) {
-        if(messages[position].receiver?.id==FirebaseAuth.getInstance().currentUser?.uid){
-            holder.binding?.name?.text = messages[position].sender?.name
+        if(messages[position].p1?.id==FirebaseAuth.getInstance().currentUser?.uid){
+            holder.binding?.name?.text = messages[position].p2?.name
             holder.binding?.lastMessage?.text = messages[position].lastMessage
 
         }else{
-            holder.binding?.name?.text = messages[position].receiver?.name
+            holder.binding?.name?.text = messages[position].p1?.name
             holder.binding?.lastMessage?.text = messages[position].lastMessage
 
         }
 
         holder.binding.root.setOnClickListener(){
-            clickListener.onMessageItemClick(messages[position]?.id?:"")
+            var isFirst= messages[position]?.participants?.get(0) == FirebaseAuth.getInstance()?.uid
+           if(isFirst){
+               clickListener.onMessageItemClick(messages[position]?.participants?.get(1) ?:"")
+
+           }else{
+               clickListener.onMessageItemClick(messages[position]?.participants?.get(0) ?:"")
+
+           }
 
         }
 
