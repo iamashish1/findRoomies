@@ -37,13 +37,14 @@ class MessageViewModel : ViewModel() {
 
     fun sendMessage(msgText: String, to: String) {
         viewModelScope.launch {
+
             try {
                 val currentUserId = auth.currentUser?.uid ?: return@launch
-
+                println(currentUserId)
+                println(to)
                 // Check if a conversation document already exists between currentUserId and to
                 val querySnapshot = db.collection("Message")
-                    .whereArrayContains("participants", currentUserId)
-                    .whereArrayContains("participants", to)
+                    .whereArrayContainsAny("participants", listOf(currentUserId,to))
                     .get()
                     .await()
 
