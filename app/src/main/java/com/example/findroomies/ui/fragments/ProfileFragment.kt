@@ -47,7 +47,7 @@ private  lateinit var binding : FragmentProfileBinding
                     it.nameT.text=user.name
                     it.emailT.text=user.email
                     it.phoneT.text=user.phone
-                    it.addressT.text=user.address
+                    it.addressT.text=user.address?.city
                     it.bioT.text=user.bio
 
                 }
