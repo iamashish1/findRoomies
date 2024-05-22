@@ -9,6 +9,7 @@ import com.example.findroomies.data.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.toObject
 import kotlinx.coroutines.tasks.await
 
 class RoomRepositoryImpl : RoomRepository {
@@ -30,8 +31,9 @@ class RoomRepositoryImpl : RoomRepository {
 
     override suspend fun getRooms(): List<RoomModel> {
         val rooms = mutableListOf<RoomModel>()
+        println(FirebaseAuth.getInstance().currentUser?.uid)
         try {
-            val querySnapshot = db.collection("Rooms").get().await()
+            val querySnapshot = db.collection("Rooms").whereNotEqualTo("addedBy.userId",FirebaseAuth.getInstance().currentUser?.uid).get().await()
             for (document in querySnapshot.documents) {
                 val room = RoomModel(
                     id = document.id,
@@ -57,6 +59,29 @@ class RoomRepositoryImpl : RoomRepository {
         return rooms
     }
 
+    override suspend fun getBookmarkedRooms(): List<RoomModel>? {
+var bRoms: List<RoomModel>? = mutableListOf()
+        try {
+            val query = db.collection("Rooms")
+                .whereArrayContains("bookmarkedBy", FirebaseAuth.getInstance().currentUser?.uid?:"")
+           var docs= query.get().await()
+
+            bRoms=  docs.map {
+                println(it.data.toString() +"String")
+              it.toObject(RoomModel::class.java)
+
+            }.toList()
+
+
+            return  bRoms;
+
+        }catch (e:Exception){
+            throw  e;
+
+        }
+
+    }
+
     override suspend fun bookmarkRoom(roomId: String): RoomModel? {
         try {
 
@@ -75,9 +100,6 @@ class RoomRepositoryImpl : RoomRepository {
                     docRef.update("bookmarkedBy", FieldValue.arrayUnion(currentUserId)).await()
 
                 }
-
-
-
             }
 
 

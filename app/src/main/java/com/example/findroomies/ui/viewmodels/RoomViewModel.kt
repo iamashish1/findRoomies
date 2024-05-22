@@ -16,6 +16,9 @@ import kotlinx.coroutines.launch
 class RoomViewModel(private val repository: RoomRepository) : ViewModel() {
     private val _rooms = MutableLiveData<List<RoomModel>>()
 
+    private val _bookmarkedRooms = MutableLiveData<List<RoomModel>?>()
+   val bookmarkedRooms :LiveData<List<RoomModel>?>  get() = _bookmarkedRooms
+
     private val _initalRooms = MutableLiveData<List<RoomModel>>()
 
     val rooms: LiveData<List<RoomModel>> get() = _rooms
@@ -32,6 +35,17 @@ class RoomViewModel(private val repository: RoomRepository) : ViewModel() {
     }
 
     var searchQuery:ObservableField<String> = ObservableField()
+
+
+    fun getBookmarkedRooms(){
+        viewModelScope.launch {
+            val bookmarkedRooms = repository.getBookmarkedRooms()
+            println("IT IS HERE")
+            println(bookmarkedRooms)
+            _bookmarkedRooms.value = bookmarkedRooms
+
+        }
+    }
 
 //BOOKMARK ROOM
 
