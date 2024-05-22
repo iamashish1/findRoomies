@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.findroomies.R
+import com.example.findroomies.listeners.BookmarkListener
 import com.example.findroomies.listeners.ConversationClickListener
 import com.example.findroomies.listeners.OnRoomItemClickInterface
 import com.example.findroomies.ui.activities.ChatActivity
@@ -28,7 +29,7 @@ import com.example.findroomies.ui.viewmodels.RoomViewModel
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment(), OnRoomItemClickInterface, ConversationClickListener {
+class HomeFragment : Fragment(), OnRoomItemClickInterface, ConversationClickListener,BookmarkListener {
     private lateinit var roomAdapter: RoomAdapter
     private lateinit var roomViewModel: RoomViewModel
     private lateinit var loadingIndicator: ProgressBar
@@ -45,7 +46,7 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface, ConversationClickList
         recyclerView = view.findViewById(R.id.recycler_view_id)
         val fragmentContext = requireContext()
 
-        roomAdapter = RoomAdapter(mutableListOf(),this, this)
+        roomAdapter = RoomAdapter(mutableListOf(),this, this,this)
         recyclerView.adapter = roomAdapter
         recyclerView.layoutManager = LinearLayoutManager(fragmentContext)
 
@@ -107,6 +108,11 @@ class HomeFragment : Fragment(), OnRoomItemClickInterface, ConversationClickList
         }
         intent.putExtras(bundle)
         startActivity(intent)
+
+    }
+
+    override fun bookmark(roomId: String) {
+        roomViewModel.bookmarkRoom(roomId)
 
     }
 

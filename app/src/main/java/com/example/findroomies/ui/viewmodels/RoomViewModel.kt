@@ -5,11 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.findroomies.data.model.RoomModel
 import com.example.findroomies.data.repository.RoomRepository
 import com.example.findroomies.data.repository.RoomRepositoryImpl
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 class RoomViewModel(private val repository: RoomRepository) : ViewModel() {
     private val _rooms = MutableLiveData<List<RoomModel>>()
@@ -31,8 +33,27 @@ class RoomViewModel(private val repository: RoomRepository) : ViewModel() {
 
     var searchQuery:ObservableField<String> = ObservableField()
 
+//BOOKMARK ROOM
 
+    fun bookmarkRoom(roomId:String){
+        viewModelScope.launch {
+            val room = repository.bookmarkRoom(roomId)
+            if(room!=null){
+                _initalRooms.value=   _initalRooms.value?.map {
+                    if(it.id==roomId){
+                        it.copy(
+                           bookmarkedBy =  room.bookmarkedBy
+                        )
+                    }else{
+                        it
+                    }
 
+                }?.toList()
+
+                _rooms.value= _initalRooms.value
+            }
+        }
+    }
 
 //GET THE LIST OF ALL ROOMS
     private fun getRooms() {

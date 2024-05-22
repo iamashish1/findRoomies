@@ -6,6 +6,8 @@ import com.example.findroomies.data.model.FurnishingType
 import com.example.findroomies.data.model.PropertyType
 import com.example.findroomies.data.model.RoomModel
 import com.example.findroomies.data.model.UserModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
@@ -54,6 +56,45 @@ class RoomRepositoryImpl : RoomRepository {
         }
         return rooms
     }
+
+    override suspend fun bookmarkRoom(roomId: String): RoomModel? {
+        try {
+
+            val docRef= db.collection("Rooms").document(roomId)
+
+            val document= docRef.get().await()
+
+            if(document.exists()){
+                val currentUserId= FirebaseAuth.getInstance().currentUser?.uid
+                val bookmarkedBy = document.get("bookmarkedBy") as? List<String> ?: emptyList()
+
+                if(bookmarkedBy.contains(currentUserId)){
+                    docRef.update("bookmarkedBy", FieldValue.arrayRemove(currentUserId)).await()
+
+                }else{
+                    docRef.update("bookmarkedBy", FieldValue.arrayUnion(currentUserId)).await()
+
+                }
+
+
+
+            }
+
+
+
+            val updatedDocument = docRef.get().await()
+            println(roomId)
+            println(updatedDocument.data)
+            return updatedDocument.toObject(RoomModel::class.java)?:null
+
+        }catch (e:Exception){
+         throw e
+        }
+
+    }
+
+
+
     override suspend fun addRoom(room: RoomModel) {
         TODO("Not yet implemented")
     }
