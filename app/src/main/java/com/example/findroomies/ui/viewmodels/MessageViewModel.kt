@@ -68,15 +68,21 @@ class MessageViewModel : ViewModel() {
                         .update("lastMessage", msgText)
                         .await()
                 } else {
+                    //MEANS CONVERSATION DOESN'T EXIST AND I HAVE TO START IT
+
                     val participants = listOf(currentUserId, to)
+
+                    val name1= db.collection("Users").document(currentUserId).get().await().get("name")
+                    val name2= db.collection("Users").document(to).get().await().get("name")
+
                     val p1 = hashMapOf(
                         "id" to to,
-                        "name" to "",
+                        "name" to name2,
                         "profilePic" to ""
                     )
                     val p2 = hashMapOf(
                         "id" to currentUserId,
-                        "name" to "",
+                        "name" to name1,
                         "profilePic" to ""
                     )
                     val conversationData = hashMapOf(
@@ -102,6 +108,7 @@ class MessageViewModel : ViewModel() {
                                 }
                         }
                         .await()
+                    getConversation(to)
                 }
             } catch (e: Exception) {
                 Log.w(ContentValues.TAG, "Error sending message.", e)
@@ -129,6 +136,7 @@ class MessageViewModel : ViewModel() {
     }
 
     fun getConversation(participantId: String) {
+        println(participantId.toString() +"PID")
         viewModelScope.launch {
             try {
                 val currentUserId = auth.currentUser?.uid ?: return@launch
@@ -156,6 +164,7 @@ class MessageViewModel : ViewModel() {
                             _conversation.value = emptyList()
                         }
                     }
+
                 }
             } catch (e: Exception) {
                 Log.w(ContentValues.TAG, "Error getting documents.", e)
