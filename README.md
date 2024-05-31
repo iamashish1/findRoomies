@@ -10,7 +10,6 @@ This is an app developed in Kotlin(Android). This app focuses on the problem peo
 - retrofit
 - firebase authentication and db
 - coroutines
-- sharedpreferences for persistence
 - Viewpager
 - Navigation Component
 - data binding
